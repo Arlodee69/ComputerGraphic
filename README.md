@@ -1,23 +1,26 @@
-# Компьютерная графика
+# Build and Run
 
-Работы хранятся в отдельных папках, каждая со своей конфигурацией CMake и каталогом сборки:
+Requires CMake, Git, a C++20 compiler, and Vulkan SDK with `glslc` in PATH.
 
-| Работа | Папка | Описание |
-| --- | --- | --- |
-| Лабораторная 1 | [vulkan-starter-app](vulkan-starter-app/LAB1.md) | Правильный октаэдр, проекции и трансформации |
-| Лабораторная 2 | [vulkan-starter-app-lab2](vulkan-starter-app-lab2/LAB2.md) | Камера, Блинн-Фонг и три типа источников света |
+## Lab 1
 
-Так первую работу можно запускать и сдавать независимо от изменений во второй.
-`send` и `send.rar` — существующая копия для отправки; работа над второй лабораторной ведётся в `vulkan-starter-app-lab2`.
+```powershell
+cd D:\CG\vulkan-starter-app
+cmake --preset mingw-debug
+cmake --build build-debug --parallel
+.\build-debug\vulkan-starter-app.exe
+```
 
-Папки можно назвать `lab1` и `lab2`, но переименование потребует повторной конфигурации CMake в свежем каталоге сборки:
-старый CMake cache содержит абсолютные пути. Сейчас существующие имена сохранены.
-
-Запуск второй работы:
+## Lab 2
 
 ```powershell
 cd D:\CG\vulkan-starter-app-lab2
 cmake --preset mingw-debug
-cmake --build build-debug --parallel 4
+cmake --build build-debug --parallel
 .\build-debug\vulkan-starter-app.exe
 ```
+
+For Visual Studio 2022, use `msvc-debug` and run
+`.\build-debug\Debug\vulkan-starter-app.exe` from the project root.
+Close the application before rebuilding. After source or shader changes, repeat
+the build and run commands. Reconfigure after changing CMake settings.
