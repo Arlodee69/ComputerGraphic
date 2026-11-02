@@ -394,8 +394,9 @@ Context context;
 bool initialize(GLFWwindow* const window, bool enable_capture) {
 	capture_enabled = enable_capture;
 	vkb::InstanceBuilder ib;
+	vk_api_version = VK_MAKE_VERSION(1, 1, 0);
 
-	auto ibr = ib.require_api_version(VK_MAKE_VERSION(1, 1, 0))
+	auto ibr = ib.require_api_version(vk_api_version)
 				 .request_validation_layers()
 				 .use_default_debug_messenger()
 				 .build();
@@ -407,7 +408,6 @@ bool initialize(GLFWwindow* const window, bool enable_capture) {
 	auto vkb_instance = ibr.value();
 	vk_instance = vkb_instance.instance;
 	vk_debug_messenger = vkb_instance.debug_messenger;
-	vk_api_version = vkb_instance.api_version;
 
 	if (glfwCreateWindowSurface(vk_instance, window, nullptr, &vk_surface) != VK_SUCCESS) {
 		const char *message = nullptr;
